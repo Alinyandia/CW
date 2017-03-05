@@ -1,7 +1,5 @@
-
 import json
 import os
-
 
 def inform(res, file):
     for key in res:
