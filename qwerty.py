@@ -31,7 +31,7 @@ def di(auth):
             else:
                 d[memb['id']] = 1
         file.write( ''.join(str(memb)) + '\n')
-    file.write(''.join(str(d)) + '\n' + '\n')
+ #   file.write(''.join(str(d)) + '\n' + '\n') #записываем сам словарь частотности
     f.close()
 
 
