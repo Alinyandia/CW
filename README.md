@@ -43,7 +43,7 @@
 ```
 
 Так как в репризитории с коллекцией есть вложенные папки, мы обходим его следующим образом:
-```pyth
+```py
 for (path, dirs, files) in os.walk("/Users/alinashaymardanova/Desktop/курсовая/tat_vk_corpus"):
     i = 1
     while i < len(files):
