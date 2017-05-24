@@ -178,22 +178,22 @@ pos=nx.spring_layout(G)
 nx.draw_networkx_nodes(G, pos, node_color='green', node_size=10)
 nx.draw_networkx_edges(G, pos, edge_color='yellow')
 ```
-![Полученный граф](https://raw.githubusercontent.com/Alinyandia/CW/master/1.png)
+![Полученный граф](https://raw.githubusercontent.com/Alinyandia/CW/master/Граф%201.png)
 
 * Далее, вытаскиваем информацию о полученном графе:
 + Количество узлов и рёбер:
 ```py
-print(G.number_of_nodes())
-print(G.number_of_edges())
+print(G.number_of_nodes()) #5019
+print(G.number_of_edges()) #5484
 ```
 + Плотность графа:
 ```py
-print(nx.density(G))
+print(nx.density(G)) #0,000436
 ```
 + Коэффициент транзитивности и средний коэффициент кластеризации:
 ```py
-print(nx.transitivity(G))
-print(nx.average_clustering(G))
+print(nx.transitivity(G)) #0,06982
+print(nx.average_clustering(G)) #0,1378
 ```
 graph_age
 ------
@@ -210,13 +210,20 @@ pos=nx.spring_layout(G)
 nx.draw_networkx_nodes(G, pos, node_color=''.join(node_colours), node_size=10)
 nx.draw_networkx_edges(G, pos, edge_color='yellow')
 ```
+![Полученный граф](https://raw.githubusercontent.com/Alinyandia/CW/master/Граф%202.png)
 * В этой же функции определяем центральность всех узлов, а так же записываем в массив ** _ list** возраст и степень узлов в порядке убывания степени (для будущего графика):
 ```py
 for nodeid in sorted(deg, key=deg.get, reverse=True):
     print(nodeid, G.degree(nodeid))
     _list.append(a[nodeid])
     _list.append(G.degree(nodeid))
-```    
+```  
+Пример того, что распечатает программа:
+```
+337881 185
+347704 181
+347706 138
+```
 age_vs_len
 ------
 В функции **age_vs_len** вычисляем среднюю степень для каждого возраста. 
@@ -258,6 +265,7 @@ plt.bar(age, friends)
 plt.xticks(age, age, rotation='vertical', size = 6)
 plt.yticks(friends, friends, rotation='vertical')
 ```
+![график 1](https://raw.githubusercontent.com/Alinyandia/CW/master/3.png)
 scatter_graf
 -------
 Строим график, который покажет насколько сильно разнятся степени пользователей. 
@@ -273,6 +281,7 @@ qantit = [int(p[mem]) for mem in p]
 ```py
 plt.scatter(age, qantit, s=4, c='g')
 ```
+![график 2](https://raw.githubusercontent.com/Alinyandia/CW/master/4.png)
 ages_count
 ------
 Функция **ages_count** -- дополнительная функция, которая подсчитывает количество человек в каждой возрастной категории. Она получает на вход словарь с возрастами пользователей **a** и обходит его, увеличивая счетчики для определенного возраста.
