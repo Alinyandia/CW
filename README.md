@@ -111,7 +111,7 @@ if res[key]['posts'][post]['author']['id'] not in result:
 ```
 А **ages**:
 ```
-356353:
+{356353: 23.10.1992, 337922: 0, 347982: 3.12.}
 ```
 age
 -----
@@ -178,6 +178,8 @@ pos=nx.spring_layout(G)
 nx.draw_networkx_nodes(G, pos, node_color='green', node_size=10)
 nx.draw_networkx_edges(G, pos, edge_color='yellow')
 ```
+![Полученный граф](https://raw.githubusercontent.com/Alinyandia/CW/master/1.png)
+
 * Далее, вытаскиваем информацию о полученном графе:
 + Количество узлов и рёбер:
 ```py
