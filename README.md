@@ -266,6 +266,7 @@ plt.xticks(age, age, rotation='vertical', size = 6)
 plt.yticks(friends, friends, rotation='vertical')
 ```
 ![график 1](https://raw.githubusercontent.com/Alinyandia/CW/master/3.png)
+
 scatter_graf
 -------
 Строим график, который покажет насколько сильно разнятся степени пользователей. 
