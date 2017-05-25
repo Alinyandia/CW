@@ -320,9 +320,6 @@ for (path, dirs, files) in os.walk("/Users/alinashaymardanova/Desktop/курсо
         age(ages)
         i += 1
 
-#file = open("куыгде.txt", 'w', encoding ='utf-8')
-#file.write(str(result)) 
-#file.close()
 graph(results)
 g, l = graph_age(results, a)
 ages_count(a)
