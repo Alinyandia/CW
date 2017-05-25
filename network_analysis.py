@@ -4,8 +4,6 @@ import re
 from datetime import date
 import networkx as nx
 import matplotlib.pyplot as plt
-from collections import defaultdict
-from collections import OrderedDict
 
 
 def inform(res):
