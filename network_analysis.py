@@ -41,7 +41,7 @@ def inform(res):
     return ages, result
 
 
-def age(ages): #высичтывает возраст людей, у которых указана полная дата рождения. Если не указана, то ставит 0
+def age(ages): #высчитывает возраст людей, у которых указана полная дата рождения. Если не указана, то ставит 0
     for person in ages:
         year = re.search('([0-9]*?)\.([0-9]*?)\.([0-9]*)', str(ages[person]))
         if year:
@@ -67,10 +67,11 @@ def graph(result): #общий граф людей
             edge.append((name, com))
     G.add_edges_from(edge)
     pos=nx.spring_layout(G)
-    plt.title("Общая сеть")
+    plt.title("Общий граф")
     nx.draw_networkx_nodes(G, pos, node_color='green', node_size=10)
     nx.draw_networkx_edges(G, pos, edge_color='yellow')
-    plt.savefig('1.png')
+    nx.write_gexf(G, 'graph_1.gexf')
+    plt.savefig('Граф_1.png')
     plt.axis('off')
     plt.show()
 
@@ -82,7 +83,7 @@ def graph(result): #общий граф людей
 
 
 def graph_age(result, a): #граф по возрастам
-    G = nx.Graph()
+    G = nx.Graph() 
     edge=[]
     colours=[]
     for name in result:
@@ -216,17 +217,24 @@ def graph_age(result, a): #граф по возрастам
     plt.title("Граф с отражнением возраста")
     nx.draw_networkx_nodes(G, pos, node_color=''.join(node_colours), node_size=10)
     nx.draw_networkx_edges(G, pos, edge_color='yellow')
-    plt.savefig('2.png')
+    nx.write_gexf(G, 'graph_2.gexf')
+    plt.savefig('Граф_2.png')
     plt.axis('off')
     plt.show()
 
     deg = nx.degree_centrality(G)
     _list = []
-    
-    for nodeid in sorted(deg, key=deg.get, reverse=True): #центральность узлов (важность узлов)
- #       print(nodeid, G.degree(nodeid)) #показывает сам узел, его соседей и возраст человека
+
+    k = 0
+    for nodeid in sorted(deg, key=deg.get, reverse=True): 
         _list.append(a[nodeid])
         _list.append(G.degree(nodeid))
+
+    for nodeid1 in sorted(deg, key=deg.get, reverse=True): #центральность узлов (важность узлов)
+        k += 1
+        print(nodeid1, G.degree(nodeid1)) #показывает сам узел и его степень
+        if k == 10:
+            break
         
     return G, _list
 
@@ -252,7 +260,7 @@ def ages_count(a): # подсчитывает количество людей в
     print('количество человек с датами рождения ' + ' ' + str(f+s+k+t))
 
 
-def age_vs_len(_list): # для каждого возраста среднее колчиество связей
+def age_vs_len(_list): # средняя степнь для каждого возраста
     i = 0
     b = 0
     res = {}
@@ -277,7 +285,7 @@ def age_vs_len(_list): # для каждого возраста среднее �
     return fin_res
 
 
-def bar_graf1(fin_res): #график возраст vs средне количество соседей
+def bar_graf(fin_res): #график возраст vs средне количество соседей
     age = [int(mem) for mem in fin_res]
     friends = [int(fin_res[mem]) for mem in fin_res]
     plt.figure(figsize=(12,5))
@@ -291,7 +299,7 @@ def bar_graf1(fin_res): #график возраст vs средне колич�
     plt.savefig('3.png')
     plt.show()
 
-def graf2(G):
+def scatter_graf(G):#как варьируются степени для каждого пользователя
     p={}
     deg = nx.degree_centrality(G)
     for nodeid in sorted(deg, key=deg.get, reverse=True):
@@ -307,7 +315,7 @@ def graf2(G):
     plt.show() 
     
 result = {}
-a = {} #возраст людей, у кого указан год рождения. у кого не указан, ставится 0
+a = {} 
 for (path, dirs, files) in os.walk("/Users/alinashaymardanova/Desktop/курсовая/tat_vk_corpus"):
     i = 1
     while i < len(files):
@@ -318,9 +326,10 @@ for (path, dirs, files) in os.walk("/Users/alinashaymardanova/Desktop/курсо
         age(ages)
         i += 1
 
+
 graph(results)
 g, l = graph_age(results, a)
 ages_count(a)
 f = age_vs_len(l)
-bar_graf1(f)
-graf2(g)
+bar_graf(f)
+scatter_graf(g)
